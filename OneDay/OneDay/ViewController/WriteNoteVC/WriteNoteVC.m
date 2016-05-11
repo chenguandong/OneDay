@@ -7,22 +7,53 @@
 //
 
 #import "WriteNoteVC.h"
+#import "HYWriteNoteNow.h"
+@interface WriteNoteVC ()<HYWriteNoteNowDelegate>
 
-@interface WriteNoteVC ()
+@property(nonatomic,strong)NSData *noteData;
 
 @end
 
 @implementation WriteNoteVC
 
+#pragma mark - lifeVC
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - IBAction
+
+- (IBAction)writeButtonAction:(id)sender {
+    
+     HYWriteNoteNow *textVC = [HYWriteNoteNow new];
+    
+    textVC.hidesBottomBarWhenPushed = YES;
+    
+    textVC.lastNoteData = _noteData;
+    
+    textVC.delegate = self;
+    
+    [self.navigationController pushViewController:textVC animated:YES];
+   
+}
+
+
+#pragma mark - NoteVC delegate
+
+- (void)noteEditEnd:(NSData*)noteData{
+
+    if (noteData) {
+        self.noteData  = noteData;
+    }
 }
 
 /*

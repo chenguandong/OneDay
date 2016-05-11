@@ -1,5 +1,6 @@
+FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/YYKit/Vendor"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/YYCategories" "${PODS_ROOT}/Headers/Public/YYKeyboardManager" "${PODS_ROOT}/Headers/Public/YYText"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/YYCategories" -isystem "${PODS_ROOT}/Headers/Public/YYKeyboardManager" -isystem "${PODS_ROOT}/Headers/Public/YYText"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"YYCategories" -l"YYKeyboardManager" -l"YYText" -l"z" -framework "Accelerate" -framework "CoreFoundation" -framework "CoreGraphics" -framework "CoreImage" -framework "CoreText" -framework "ImageIO" -framework "MobileCoreServices" -framework "QuartzCore" -framework "UIKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/YYKit" "${PODS_ROOT}/Headers/Public/YYKit/WebP"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/YYKit" -isystem "${PODS_ROOT}/Headers/Public/YYKit/WebP"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"YYKit" -l"sqlite3" -l"z" -framework "Accelerate" -framework "AssetsLibrary" -framework "CoreFoundation" -framework "CoreGraphics" -framework "CoreImage" -framework "CoreText" -framework "ImageIO" -framework "MobileCoreServices" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit" -framework "WebP"
 PODS_ROOT = ${SRCROOT}/Pods

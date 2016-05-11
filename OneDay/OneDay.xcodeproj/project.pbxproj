@@ -23,6 +23,8 @@
 		298DEB121CDB619600AD4773 /* MapNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 298DEB101CDB619600AD4773 /* MapNoteVC.m */; };
 		298DEB131CDB619600AD4773 /* MapNoteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 298DEB111CDB619600AD4773 /* MapNoteVC.xib */; };
 		298DEB171CDB6C4400AD4773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 298DEB191CDB6C4400AD4773 /* Localizable.strings */; };
+		29AAD4A31CE326F300DCE81C /* HYWriteNoteNow.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AAD4A21CE326F300DCE81C /* HYWriteNoteNow.m */; };
+		29AAD4A71CE32F9C00DCE81C /* map-o.png in Resources */ = {isa = PBXBuildFile; fileRef = 29AAD4A61CE32F9C00DCE81C /* map-o.png */; };
 		29B0E7361CDAF3C300FECDC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E7351CDAF3C300FECDC3 /* main.m */; };
 		29B0E7391CDAF3C300FECDC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E7381CDAF3C300FECDC3 /* AppDelegate.m */; };
 		29B0E7411CDAF3C300FECDC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B0E7401CDAF3C300FECDC3 /* Assets.xcassets */; };
@@ -81,6 +83,9 @@
 		298DEB161CDB6C2F00AD4773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		298DEB181CDB6C4400AD4773 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		298DEB1C1CDB6CAE00AD4773 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		29AAD4A11CE326F200DCE81C /* HYWriteNoteNow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYWriteNoteNow.h; sourceTree = "<group>"; };
+		29AAD4A21CE326F300DCE81C /* HYWriteNoteNow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYWriteNoteNow.m; sourceTree = "<group>"; };
+		29AAD4A61CE32F9C00DCE81C /* map-o.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-o.png"; sourceTree = "<group>"; };
 		29B0E7311CDAF3C200FECDC3 /* OneDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B0E7351CDAF3C300FECDC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B0E7371CDAF3C300FECDC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -250,11 +255,29 @@
 		298DEB001CDB5F7600AD4773 /* WriteNoteVC */ = {
 			isa = PBXGroup;
 			children = (
+				29AAD4A11CE326F200DCE81C /* HYWriteNoteNow.h */,
+				29AAD4A21CE326F300DCE81C /* HYWriteNoteNow.m */,
 				298DEB0A1CDB617F00AD4773 /* WriteNoteVC.h */,
 				298DEB0B1CDB617F00AD4773 /* WriteNoteVC.m */,
 				298DEB0C1CDB617F00AD4773 /* WriteNoteVC.xib */,
 			);
 			path = WriteNoteVC;
+			sourceTree = "<group>";
+		};
+		29AAD4A41CE32F7100DCE81C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				29AAD4A51CE32F8F00DCE81C /* CommImages */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		29AAD4A51CE32F8F00DCE81C /* CommImages */ = {
+			isa = PBXGroup;
+			children = (
+				29AAD4A61CE32F9C00DCE81C /* map-o.png */,
+			);
+			path = CommImages;
 			sourceTree = "<group>";
 		};
 		29B0E7281CDAF3C200FECDC3 = {
@@ -301,6 +324,7 @@
 		29B0E7341CDAF3C300FECDC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29AAD4A41CE32F7100DCE81C /* Images */,
 				29B0E7351CDAF3C300FECDC3 /* main.m */,
 				298DEB191CDB6C4400AD4773 /* Localizable.strings */,
 			);
@@ -449,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29B0E7441CDAF3C300FECDC3 /* LaunchScreen.storyboard in Resources */,
+				29AAD4A71CE32F9C00DCE81C /* map-o.png in Resources */,
 				298DEB171CDB6C4400AD4773 /* Localizable.strings in Resources */,
 				29B0E7411CDAF3C300FECDC3 /* Assets.xcassets in Resources */,
 				298DEB0E1CDB617F00AD4773 /* WriteNoteVC.xib in Resources */,
@@ -522,6 +547,7 @@
 				298DEAEC1CDB569700AD4773 /* BaseTabBarController.m in Sources */,
 				298DEAE11CDB55D000AD4773 /* Constant.m in Sources */,
 				298DEAF71CDB5B8B00AD4773 /* WelcomeVC.m in Sources */,
+				29AAD4A31CE326F300DCE81C /* HYWriteNoteNow.m in Sources */,
 				298DEB121CDB619600AD4773 /* MapNoteVC.m in Sources */,
 				298DEB0D1CDB617F00AD4773 /* WriteNoteVC.m in Sources */,
 				298DEB031CDB5FC600AD4773 /* NoteListTableViewVC.m in Sources */,

@@ -16,10 +16,10 @@
 #import "BaseCollectionViewController.h"
 
 //屏幕宽度
-#define HY_SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
+#define kHY_SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 
 //屏幕高度
-#define HY_SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define kHY_SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 
 //16进制 颜色值 例子
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]

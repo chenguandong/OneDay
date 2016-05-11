@@ -1,4 +1,2 @@
 platform :ios, '8.0'
-pod 'YYText'
-pod 'YYCategories'
-pod 'YYKeyboardManager'
+pod 'YYKit'
