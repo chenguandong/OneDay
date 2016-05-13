@@ -36,18 +36,26 @@
     _mapNoteVC = [[MapNoteVC alloc]init];
     _settingVC = [[SettingTableViewVC alloc]init];
     
+    //-------set title
+    
+    _noteListVC.title = NSLocalizedString(@"note", nil);
+    _writeNoteVC.title = NSLocalizedString(@"writeNote", nil);
+    _mapNoteVC.title = NSLocalizedString(@"noteMap", nil);
+    _settingVC.title = NSLocalizedString(@"setting", nil);
+    
     //日记列表
     UINavigationController *noteListNavVC = [[UINavigationController alloc]initWithRootViewController:_noteListVC];
     
-    UITabBarItem *noteListTabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"note", nil) image:[UIImage imageNamed:@""] tag:1];
+    UITabBarItem *noteListTabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"note", nil) image:[UIImage imageNamed:@"tabbar_list"] tag:1];
     
     noteListNavVC.tabBarItem = noteListTabBarItem;
+    
     
     //写日记
     UINavigationController *writeNoteNavVc = [[UINavigationController alloc]initWithRootViewController:_writeNoteVC];
     
     
-    UITabBarItem *writeNoteTabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"writeNote", nil) image:[UIImage imageNamed:@""] tag:2];
+    UITabBarItem *writeNoteTabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"writeNote", nil) image:[UIImage imageNamed:@"tabbar_write"] tag:2];
     
     writeNoteNavVc.tabBarItem = writeNoteTabBarItem;
     
@@ -55,7 +63,7 @@
     //日记地图
     UINavigationController *mapNoteNavVc = [[UINavigationController alloc]initWithRootViewController:_mapNoteVC];
     
-    UITabBarItem *mapNoteTabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"noteMap", nil) image:[UIImage imageNamed:@""] tag:3];
+    UITabBarItem *mapNoteTabBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"noteMap", nil) image:[UIImage imageNamed:@"tabbar_location"] tag:3];
     
     mapNoteNavVc.tabBarItem = mapNoteTabBarItem;
     
@@ -63,7 +71,7 @@
     //设置
     UINavigationController *settingNavVc = [[UINavigationController alloc]initWithRootViewController:_settingVC];
     
-    UITabBarItem *settingBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"setting", nil) image:[UIImage imageNamed:@""] tag:4];
+    UITabBarItem *settingBarItem = [[UITabBarItem alloc]initWithTitle:NSLocalizedString(@"setting", nil) image:[UIImage imageNamed:@"tabbar_setting"] tag:4];
     
     settingNavVc.tabBarItem = settingBarItem;
     

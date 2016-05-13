@@ -18,20 +18,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OneDay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xzg-6K-tsJ">
-                                <rect key="frame" x="106" y="266" width="108" height="36"/>
+                                <rect key="frame" x="71" y="254" width="178" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="CQg-Hu-ZsN"/>
-                                    <constraint firstAttribute="width" constant="108" id="Ybm-fN-YrJ"/>
+                                    <constraint firstAttribute="height" constant="60" id="JKQ-SN-AlY"/>
+                                    <constraint firstAttribute="width" constant="178" id="bPM-0c-hVB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Xzg-6K-tsJ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="eAa-my-Eg4"/>
-                            <constraint firstItem="Xzg-6K-tsJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="h2a-5p-Tuk"/>
+                            <constraint firstItem="Xzg-6K-tsJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="AjG-rX-uOA"/>
+                            <constraint firstItem="Xzg-6K-tsJ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="SFW-vD-5nh"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

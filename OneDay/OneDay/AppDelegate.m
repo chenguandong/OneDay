@@ -22,7 +22,7 @@
 
     
     //设置全局UI 样式 tabBar nagation and so
-   // [AppGlobalSetting setGlobalStyle];
+    [AppGlobalSetting setGlobalStyle];
 
     //第一个窗口 欢迎页面
     WelcomeVC *welcomeVC = [[WelcomeVC alloc]init];

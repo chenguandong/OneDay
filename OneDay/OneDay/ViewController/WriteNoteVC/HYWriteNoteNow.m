@@ -8,13 +8,15 @@
 //pod 'YYText'
 //pod 'YYCategories'
 //pod 'YYKeyboardManager'
+// [_self setExclusionPathEnabled:NO];
 //
 
 #import "HYWriteNoteNow.h"
 #import <YYKit.h>
 #import "Constant.h"
+#import <BlocksKit+UIKit.h>
 @interface HYWriteNoteNow () <YYTextViewDelegate, YYTextKeyboardObserver>
-@property (nonatomic, assign) YYTextView *textView;
+@property (nonatomic, strong) YYTextView *textView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UISwitch *verticalSwitch;
 @property (nonatomic, strong) UISwitch *exclusionSwitch;
@@ -27,24 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+  
     
     self.view.backgroundColor = [UIColor whiteColor];
     if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    //[self initImageView];
-    __weak typeof(self) _self = self;
-    
-    UIView *toolbar;
-    if ([UIVisualEffectView class]) {
-        toolbar = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
-    } else {
-        toolbar = [UIToolbar new];
-    }
-    toolbar.size = CGSizeMake(kHY_SCREEN_WIDTH, 40);
-    toolbar.top = kiOS7Later ? 64 : 0;
-    [self.view addSubview:toolbar];
-    
+   
     NSMutableAttributedString *text = nil;
     
     if (_lastNoteData) {
@@ -66,91 +57,53 @@
     self.text = text;
     
     YYTextView *textView = [YYTextView new];
+    
     textView.attributedText = text;
     textView.size = self.view.size;
     textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     textView.delegate = self;
-    textView.allowsPasteImage = YES;
+    textView.allowsPasteImage = YES; /// Pasts image
+    //textView.allowsPasteAttributedString = YES; /// Paste attributed string
 
     if (kiOS7Later) {
         textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     } else {
         textView.height -= 64;
     }
-    textView.contentInset = UIEdgeInsetsMake(toolbar.bottom, 0, 0, 0);
-    textView.scrollIndicatorInsets = textView.contentInset;
+    textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    //textView.scrollIndicatorInsets = textView.contentInset;
     textView.selectedRange = NSMakeRange(text.length, 0);
     textView.bounces = YES;
-    [self.view insertSubview:textView belowSubview:toolbar];
+    [self.view addSubview:textView];
+     
     self.textView = textView;
     
 
     
-    /*------------------------------ Toolbar ---------------------------------*/
-    UILabel *label;
-    label = [UILabel new];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:14];
-    label.text = @"Vertical:";
-    label.size = CGSizeMake([label.text widthForFont:label.font] + 2, toolbar.height);
-    label.left = 10;
-    [toolbar addSubview:label];
-    
-    _verticalSwitch = [UISwitch new];
-    [_verticalSwitch sizeToFit];
-    _verticalSwitch.centerY = toolbar.height / 2;
-    _verticalSwitch.left = label.right - 5;
-    _verticalSwitch.layer.transformScale = 0.8;
-    [_verticalSwitch addBlockForControlEvents:UIControlEventValueChanged block:^(UISwitch *switcher) {
-        [_self.textView endEditing:YES];
-        if (switcher.isOn) {
-            [_self setExclusionPathEnabled:NO];
-            _self.exclusionSwitch.on = NO;
-        }
-        _self.exclusionSwitch.enabled = !switcher.isOn;
-        _self.textView.verticalForm = switcher.isOn; /// Set vertical form
-    }];
-    [toolbar addSubview:_verticalSwitch];
-    
-    label = [UILabel new];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:14];
-    label.text = @"Debug:";
-    label.size = CGSizeMake([label.text widthForFont:label.font] + 2, toolbar.height);
-    label.left = _verticalSwitch.right + 5;
-    [toolbar addSubview:label];
+     _textView.inputAccessoryView = [self bottomToolsBar];
     
     
-    label = [UILabel new];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:14];
-    label.text = @"Exclusion:";
-    label.size = CGSizeMake([label.text widthForFont:label.font] + 2, toolbar.height);
-    label.left = 300 + 5;
-    [toolbar addSubview:label];
+    [self.navigationController setToolbarHidden:NO animated:YES];
     
-    _exclusionSwitch = [UISwitch new];
-    [_exclusionSwitch sizeToFit];
-    _exclusionSwitch.centerY = toolbar.height / 2;
-    _exclusionSwitch.left = label.right - 5;
-    _exclusionSwitch.layer.transformScale = 0.8;
-    [_exclusionSwitch addBlockForControlEvents:UIControlEventValueChanged block:^(UISwitch *switcher) {
-        [_self setExclusionPathEnabled:switcher.isOn];
-    }];
-    [toolbar addSubview:_exclusionSwitch];
+   
+   
+    self.toolbarItems = [self toolsBarButtonItems];
     
-    
+  
     [[YYTextKeyboardManager defaultManager] addObserver:self];
+    
 }
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:YES];
     
-    
     _textView.bounces = YES;
     
-    //[_textView becomeFirstResponder];
+
 }
 
 - (void)dealloc {
@@ -158,41 +111,57 @@
 }
 
 
-#pragma mark - private method
-- (void)setExclusionPathEnabled:(BOOL)enabled {
-    if (enabled) {
-        [self.textView addSubview:self.imageView];
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.imageView.frame
-                                                        cornerRadius:self.imageView.layer.cornerRadius];
-        self.textView.exclusionPaths = @[path]; /// Set exclusion paths
-    } else {
-        [self.imageView removeFromSuperview];
-        self.textView.exclusionPaths = nil;
-    }
+
+
+- (NSArray<UIBarButtonItem*>*)toolsBarButtonItems{
+    
+    UIBarButtonItem *locationBarButton = [[UIBarButtonItem alloc]bk_initWithImage:[UIImage imageNamed:@"toolsbar_location"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        NSLog(@"xxxxx");
+        
+    }];
+    
+    UIBarButtonItem *fixedSpaceBarButton = [[UIBarButtonItem alloc]bk_initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace handler:^(id sender) {
+        
+    }];
+    
+    UIBarButtonItem *tagBarButton = [[UIBarButtonItem alloc]bk_initWithImage:[UIImage imageNamed:@"toolsbar_tag"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+    }];
+    
+    UIBarButtonItem *orderbyBarButton = [[UIBarButtonItem alloc]bk_initWithImage:[UIImage imageNamed:@"toolsbar_orderby"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        [_textView setVerticalForm:!_textView.verticalForm];
+        
+        
+    }];
+    
+    
+    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc]bk_initWithImage:[UIImage imageNamed:@"toolsbar_camera"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
+        
+    }];
+    
+    return @[locationBarButton,fixedSpaceBarButton,tagBarButton,fixedSpaceBarButton,cameraButton,fixedSpaceBarButton,orderbyBarButton];
+
 }
 
-- (void)initImageView {
-    NSData *data = [NSData dataNamed:@"map-o.png"];
-    UIImage *image = [[YYImage alloc] initWithData:data scale:2];
-    UIImageView *imageView = [[YYAnimatedImageView alloc] initWithImage:image];
-    imageView.clipsToBounds = YES;
-    imageView.userInteractionEnabled = YES;
-    imageView.layer.cornerRadius = imageView.height / 2;
-    imageView.center = CGPointMake(kScreenWidth / 2, kScreenWidth / 2);
-    self.imageView = imageView;
+- (UIToolbar*)bottomToolsBar{
     
-    @weakify(self);
-    UIPanGestureRecognizer *g = [[UIPanGestureRecognizer alloc] initWithActionBlock:^(UIPanGestureRecognizer *g) {
-        @strongify(self);
-        if (!self) return;
-        CGPoint p = [g locationInView:self.textView];
-        self.imageView.center = p;
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.imageView.frame
-                                                        cornerRadius:self.imageView.layer.cornerRadius];
-        self.textView.exclusionPaths = @[path];
-    }];
-    [imageView addGestureRecognizer:g];
+   UIToolbar *toolBar =  [[UIToolbar alloc]init];
+    
+    toolBar.size = CGSizeMake(kHY_SCREEN_WIDTH, 44);
+    
+    toolBar.barStyle = UIBarStyleDefault;
+  
+    toolBar.items = [self toolsBarButtonItems];
+
+
+    return toolBar;
+    
 }
+
+
 
 - (void)edit:(UIBarButtonItem *)item {
     
@@ -214,14 +183,6 @@
 }
 
 
-//- (void)viewDidLayoutSubviews{
-//
-//    _textView.frame = self.view.bounds;
-//    
-//    _textView.attributedText = _text;
-//    
-//    _textView.allowsPasteImage = YES;
-//}
 
 #pragma mark text view delegate
 
@@ -255,7 +216,6 @@
         _textView.frame = self.view.bounds;
     }
     
-    _text = _textView.attributedText.copy;
     
 }
 

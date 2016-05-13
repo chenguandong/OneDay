@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WriteNoteVC">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="writeNoteButton" destination="NuA-Q0-D69" id="cO8-Yd-RFs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -16,24 +17,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuA-Q0-D69">
-                    <rect key="frame" x="77" y="213" width="167" height="141"/>
-                    <color key="backgroundColor" red="0.93333333330000001" green="0.42745098040000001" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="85" y="209" width="150" height="150"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="141" id="Syv-dF-nxP"/>
-                        <constraint firstAttribute="width" constant="167" id="tgv-Qi-u6E"/>
+                        <constraint firstAttribute="height" constant="150" id="6jx-YX-dea"/>
+                        <constraint firstAttribute="width" constant="150" id="RNQ-lk-Sng"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <state key="normal" title="写日记">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="writeButtonAction:" destination="-1" eventType="touchUpInside" id="daJ-ca-n66"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.39607843139999999" green="0.73333333329999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="NuA-Q0-D69" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="8nd-4W-uWr"/>
-                <constraint firstItem="NuA-Q0-D69" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mPW-cT-FfS"/>
+                <constraint firstItem="NuA-Q0-D69" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="32o-u5-Cfa"/>
+                <constraint firstItem="NuA-Q0-D69" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Qwo-Tf-S1Y"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
