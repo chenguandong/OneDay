@@ -9,3 +9,11 @@
 "writeNote"="WriteNote";
 "noteMap"="NoteMap";
 "setting"="Setting";
+
+"Mon" = "Mon";
+"Tue" = "Tue";
+"Wed" = "Wed";
+"Thu" = "Thu";
+"Fri" = "Fri";
+"Sat" = "Sat";
+"Sun" = "Sun";

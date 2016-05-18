@@ -2743,10 +2743,13 @@ typedef NS_ENUM(NSUInteger, YYTextMoveDirection) {
 }
 
 - (BOOL)becomeFirstResponder {
+    
+    
     BOOL isFirstResponder = self.isFirstResponder;
     if (isFirstResponder) return YES;
     BOOL shouldDetectData = [self _shouldDetectText];
     BOOL become = [super becomeFirstResponder];
+    
     if (!isFirstResponder && become) {
         [self _endTouchTracking];
         [self _hideMenu];

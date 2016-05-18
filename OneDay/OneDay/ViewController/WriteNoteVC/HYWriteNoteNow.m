@@ -15,82 +15,114 @@
 #import <YYKit.h>
 #import "Constant.h"
 #import <BlocksKit+UIKit.h>
-@interface HYWriteNoteNow () <YYTextViewDelegate, YYTextKeyboardObserver>
-@property (nonatomic, strong) YYTextView *textView;
+#import "LocationTools.h"
+#import "NoteDBModel.h"
+#import "LocationModel.h"
+@interface HYWriteNoteNow () <YYTextViewDelegate, YYTextKeyboardObserver,LocationToolsDelegate>
+
+
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UISwitch *verticalSwitch;
 @property (nonatomic, strong) UISwitch *exclusionSwitch;
-@property(nonatomic,copy)NSMutableAttributedString *text;
+@property(nonatomic,strong)LocationTools *locationTools;
+
+
+//存储用户位置信息
+@property(nonatomic)LocationModel *locationModel;
+
+//textView
+
+@property(nonatomic)NSMutableAttributedString *textAttributed;
+
+@property (nonatomic, strong) YYTextView *textView;
+
 @end
 
 @implementation HYWriteNoteNow
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        _textAttributed = [[NSMutableAttributedString alloc]initWithString:@" "];
+        
+        _textView = [[YYTextView alloc]init];
+        
+        [[YYTextKeyboardManager defaultManager] addObserver:self];
+    }
+    return self;
+}
+
 #pragma mark - lifeVC
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-  
     
+    
+    // setting toolsBar
+    [self.navigationController setToolbarHidden:NO animated:NO];
+    
+    _textView.inputAccessoryView = [self bottomToolsBar];
+    
+    self.toolbarItems = [self toolsBarButtonItems];
+    
+
+    _locationTools = [LocationTools new];
+    
+    _locationTools.delegate = self;
+    
+
     self.view.backgroundColor = [UIColor whiteColor];
+    
     if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
    
-    NSMutableAttributedString *text = nil;
     
-    if (_lastNoteData) {
-        text = [NSMutableAttributedString unarchiveFromData:_lastNoteData];
+    
+    if (_noteModel.note_body) {
         
-        NSLog(@"%@",text);
+        _textAttributed = [NSMutableAttributedString unarchiveFromData:_noteModel.note_body];
         
     }else{
-        text = [[NSMutableAttributedString alloc] initWithString:@"It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the season of light, it was the season of darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us. We were all going direct to heaven, we were all going direct the other way.\n\n这是最好的时代，这是最坏的时代；这是智慧的时代，这是愚蠢的时代；这是信仰的时期，这是怀疑的时期；这是光明的季节，这是黑暗的季节；这是希望之春，这是失望之冬；人们面前有着各样事物，人们面前一无所有；人们正在直登天堂，人们正在直下地狱。"];
         
-        text.font = [UIFont fontWithName:@"Times New Roman" size:20];
-        text.lineSpacing = 4;
-        text.firstLineHeadIndent = 20;
+        _textAttributed = [[NSMutableAttributedString alloc]initWithString:@" "];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+            [_textView becomeFirstResponder];
+        });
+        
+        _textAttributed.font = [UIFont fontWithName:@"Times New Roman" size:20];
+        _textAttributed.lineSpacing = 4;
+        _textAttributed.firstLineHeadIndent = 20;
        
     }
     
-  
+    _textView.attributedText = _textAttributed;
     
-    self.text = text;
+    _textView.frame = self.view.bounds;
     
-    YYTextView *textView = [YYTextView new];
+    _textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    textView.attributedText = text;
-    textView.size = self.view.size;
-    textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    textView.delegate = self;
-    textView.allowsPasteImage = YES; /// Pasts image
+    _textView.delegate = self;
+    
+    //textView.allowsPasteImage = YES; /// Pasts image
+    
     //textView.allowsPasteAttributedString = YES; /// Paste attributed string
 
-    if (kiOS7Later) {
-        textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
-    } else {
-        textView.height -= 64;
-    }
-    textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    //textView.scrollIndicatorInsets = textView.contentInset;
-    textView.selectedRange = NSMakeRange(text.length, 0);
-    textView.bounces = YES;
-    [self.view addSubview:textView];
-     
-    self.textView = textView;
+    _textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
+    _textView.contentInset = UIEdgeInsetsMake(64, 0, 64, 0);
+    
+    _textView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
+    
+    _textView.selectedRange = NSMakeRange(_textAttributed.length, 0);
 
     
-     _textView.inputAccessoryView = [self bottomToolsBar];
+    [self.view addSubview:_textView];
+
     
-    
-    [self.navigationController setToolbarHidden:NO animated:YES];
-    
-   
-   
-    self.toolbarItems = [self toolsBarButtonItems];
-    
-  
-    [[YYTextKeyboardManager defaultManager] addObserver:self];
     
 }
 
@@ -101,9 +133,22 @@
     
     [super viewWillAppear:YES];
     
-    _textView.bounces = YES;
     
+}
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:YES];
+    
+    if (_noteModel) {
+        
+        if (![_textView.text isEqualToString:_noteModel.note_title]) {
+            [self updateNote];
+        }
+
+    }else{
+        [self saveNote];
+    }
 }
 
 - (void)dealloc {
@@ -112,7 +157,97 @@
 
 
 
+#pragma mark - privateMethod
 
+- (void)saveNote{
+    
+    
+    if (!_textView.text.isNotBlank) {
+        
+        return;
+    }
+
+    
+    NoteDBModel *noteModel = [[NoteDBModel alloc]init];
+    
+    noteModel.note_title = _textView.text;
+    
+    NSData *noteData =  [_textView.attributedText archiveToData];
+    
+    if (noteData) {
+        noteModel.note_body = noteData;
+    }
+    
+    noteModel.note_weather = @"18℃ 晴";
+    
+    if (_locationModel) {
+        
+        noteModel.note_lat = [NSNumber numberWithDouble:_locationModel.lat];
+        
+        noteModel.note_lng = [NSNumber numberWithDouble:_locationModel.log];
+        
+        noteModel.note_adress = _locationModel.adressName;
+    }
+    
+    noteModel.note_sync = @NO;
+    
+    TagDBModel *tagModel = [[TagDBModel alloc]init];
+    
+    tagModel.tagName = @"标签";
+    
+    [noteModel.note_tag addObject:tagModel];
+    
+    noteModel.note_date = [NSDate date];
+    
+    FolderDBModel *folderModel = [[FolderDBModel alloc]init];
+    
+    folderModel.folderName= @"默认文件夹";
+    
+    noteModel.note_folder = folderModel;
+    
+    
+    noteModel.note_step = @"10000";
+    
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    [realm transactionWithBlock:^{
+        
+        [realm addObject:noteModel];
+        
+    }];
+    
+}
+
+- (void)updateNote{
+
+    if (_noteModel) {
+        
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        
+        [realm beginWriteTransaction];
+        
+        if (_textView.text.length!=0) {
+            
+            _noteModel.note_title = _textView.text;
+        }
+
+        
+        NSData *noteData =  [_textView.attributedText archiveToData];
+        
+        if (noteData) {
+            _noteModel.note_body = noteData;
+        }
+        
+        [realm commitWriteTransaction];
+    }
+}
+
+/**
+ *  获取ToolsBar 的 BarButtonItems
+ *
+ *  @return BarButtonItems
+ */
 - (NSArray<UIBarButtonItem*>*)toolsBarButtonItems{
     
     UIBarButtonItem *locationBarButton = [[UIBarButtonItem alloc]bk_initWithImage:[UIImage imageNamed:@"toolsbar_location"] style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -146,9 +281,14 @@
 
 }
 
+/**
+ *  获取ToolsBar
+ *
+ *  @return ToolsBar
+ */
 - (UIToolbar*)bottomToolsBar{
     
-   UIToolbar *toolBar =  [[UIToolbar alloc]init];
+    UIToolbar *toolBar =  [[UIToolbar alloc]init];
     
     toolBar.size = CGSizeMake(kHY_SCREEN_WIDTH, 44);
     
@@ -171,15 +311,7 @@
     } else {
         [_textView becomeFirstResponder];
     }
-    
-    NSLog(@"%@",_textView.attributedText);
-    
-   NSData *noteData =  [_textView.attributedText archiveToData];
-    
-    if ([_delegate respondsToSelector:@selector(noteEditEnd:)]) {
-     
-        [_delegate noteEditEnd:noteData];
-    }
+
 }
 
 
@@ -195,6 +327,16 @@
 
 - (void)textViewDidEndEditing:(YYTextView *)textView {
     self.navigationItem.rightBarButtonItem = nil;
+}
+
+#pragma mark - Location delegate
+
+- (void)onLocationSuccess:(LocationModel*)locationModel{
+
+    _locationModel = locationModel;
+}
+
+- (void)onLocationFail{
 }
 
 

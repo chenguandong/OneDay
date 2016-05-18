@@ -9,9 +9,8 @@
 #import "WriteNoteVC.h"
 #import "HYWriteNoteNow.h"
 
-@interface WriteNoteVC ()<HYWriteNoteNowDelegate>
+@interface WriteNoteVC ()
 
-@property(nonatomic,strong)NSData *noteData;
 
 @property (weak, nonatomic) IBOutlet UIButton *writeNoteButton;
 
@@ -30,7 +29,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    [self.navigationController setToolbarHidden:YES animated:NO];
     
     _writeNoteButton.layer.borderColor = [UIColor blackColor].CGColor;
     _writeNoteButton.layer.cornerRadius = 75;
@@ -56,22 +55,8 @@
     
     textVC.hidesBottomBarWhenPushed = YES;
     
-    textVC.lastNoteData = _noteData;
-    
-    textVC.delegate = self;
-    
     [self.navigationController pushViewController:textVC animated:YES];
    
-}
-
-
-#pragma mark - NoteVC delegate
-
-- (void)noteEditEnd:(NSData*)noteData{
-
-    if (noteData) {
-        self.noteData  = noteData;
-    }
 }
 
 /*

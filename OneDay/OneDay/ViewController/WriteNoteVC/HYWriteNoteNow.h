@@ -8,17 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol HYWriteNoteNowDelegate <NSObject>
-
-@optional
-- (void)noteEditEnd:(NSData*)noteData;
-
-@end
+@class NoteDBModel;
 
 @interface HYWriteNoteNow : UIViewController
 
-@property(nonatomic,weak)id<HYWriteNoteNowDelegate>delegate;
-
-@property(nonatomic,strong)NSData *lastNoteData;
+@property(nonatomic,strong)NoteDBModel *noteModel;
 
 @end
