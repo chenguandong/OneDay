@@ -15,6 +15,7 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - DateTools (1.7.0)
+  - Masonry (1.0.0)
   - Realm (0.101.0):
     - Realm/Headers (= 0.101.0)
   - Realm/Headers (0.101.0)
@@ -25,12 +26,14 @@ PODS:
 DEPENDENCIES:
   - BlocksKit
   - DateTools
+  - Masonry
   - Realm
   - YYKit
 
 SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   Realm: b21596d6d7e1c054f6fae967d27263d2593ca309
   YYKit: f2654fe525de2283648db957bddb37ddd8e06549
 

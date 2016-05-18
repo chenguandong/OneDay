@@ -18,6 +18,7 @@
 #import "LocationTools.h"
 #import "NoteDBModel.h"
 #import "LocationModel.h"
+#import "Constant.h"
 @interface HYWriteNoteNow () <YYTextViewDelegate, YYTextKeyboardObserver,LocationToolsDelegate>
 
 
@@ -49,6 +50,8 @@
         
         _textView = [[YYTextView alloc]init];
         
+        _textView.tintColor = [UIColor blackColor];
+        
         [[YYTextKeyboardManager defaultManager] addObserver:self];
     }
     return self;
@@ -58,6 +61,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // setting toolsBar
     [self.navigationController setToolbarHidden:NO animated:NO];
@@ -71,9 +75,17 @@
     
     _locationTools.delegate = self;
     
-
-    self.view.backgroundColor = [UIColor whiteColor];
     
+    //add textview
+    
+    
+    [self.view addSubview:_textView];
+    
+    [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+
     if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -101,28 +113,20 @@
     
     _textView.attributedText = _textAttributed;
     
-    _textView.frame = self.view.bounds;
-    
+
     _textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
     _textView.delegate = self;
-    
-    //textView.allowsPasteImage = YES; /// Pasts image
-    
-    //textView.allowsPasteAttributedString = YES; /// Paste attributed string
 
     _textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     
     _textView.contentInset = UIEdgeInsetsMake(64, 0, 64, 0);
     
-    _textView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
+    _textView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 64, 0);
     
     _textView.selectedRange = NSMakeRange(_textAttributed.length, 0);
 
-    
-    [self.view addSubview:_textView];
 
-    
     
 }
 
@@ -264,6 +268,8 @@
         
     }];
     
+    
+    /*
     UIBarButtonItem *orderbyBarButton = [[UIBarButtonItem alloc]bk_initWithImage:[UIImage imageNamed:@"toolsbar_orderby"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         
         [_textView setVerticalForm:!_textView.verticalForm];
@@ -276,8 +282,10 @@
         
         
     }];
-    
+     
     return @[locationBarButton,fixedSpaceBarButton,tagBarButton,fixedSpaceBarButton,cameraButton,fixedSpaceBarButton,orderbyBarButton];
+    */
+    return @[locationBarButton,fixedSpaceBarButton,tagBarButton];
 
 }
 
@@ -295,7 +303,6 @@
     toolBar.barStyle = UIBarStyleDefault;
   
     toolBar.items = [self toolsBarButtonItems];
-
 
     return toolBar;
     

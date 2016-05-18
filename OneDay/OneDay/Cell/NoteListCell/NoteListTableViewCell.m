@@ -41,17 +41,6 @@
         
         _noteModel = noteModel;
         
-        /*
-        NSMutableAttributedString*textAttributed = [NSMutableAttributedString unarchiveFromData:_noteModel.note_body];
-        textAttributed.font = [UIFont fontWithName:@"Times New Roman" size:20];
-        textAttributed.lineSpacing = 4;
-        textAttributed.firstLineHeadIndent = 20;
-        _textView.font =[UIFont fontWithName:@"Times New Roman" size:20];
-        _textView.attributedText = textAttributed;
-         
-         */
-        
-        
         _textView.text = _noteModel.note_title;
         
         NSDate *date = _noteModel.note_date;

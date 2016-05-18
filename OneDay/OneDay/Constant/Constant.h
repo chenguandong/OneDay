@@ -14,6 +14,9 @@
 #import "BaseTabBarController.h"
 #import "BaseTableViewController.h"
 #import "BaseCollectionViewController.h"
+#import <Masonry.h>
+
+#define MAS_SHORTHAND
 
 //屏幕宽度
 #define kHY_SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
