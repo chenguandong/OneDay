@@ -15,6 +15,7 @@
 #import <TSClusterMapView.h>
 #import "TSDemoClusteredAnnotationView.h"
 #import "HYWriteNoteNow.h"
+#import "Constant.h"
 @interface MapNoteVC ()<CLLocationManagerDelegate,MKMapViewDelegate,TSClusterMapViewDelegate>
 
 @property(nonatomic,strong)CLLocationManager *localtionManage;
@@ -79,27 +80,31 @@
     self.localtionManage.desiredAccuracy =kCLLocationAccuracyBest;
     
     // 最小更新距离
-    self.localtionManage.distanceFilter = 10.0f;
+    self.localtionManage.distanceFilter = 100.0f;
     
 
     _mapView.delegate = self;
     
-   // _mapView.showsUserLocation = YES;
+    _mapView.showsUserLocation = YES;
+    
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance
-    ([_mapView.userLocation coordinate], 3000, 3000);
+    ([_mapView.userLocation coordinate], 1500, 1500);
     [_mapView setRegion:region animated:YES];
-
+    
+     [self.localtionManage startUpdatingLocation];
+    
+    [self allAnnotations];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(allAnnotations) name:kHYNotifacation_NoteSaveChange object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:YES];
     
-     [self.localtionManage startUpdatingLocation];
-    
-    [self allAnnotations];
-    
+    [self.localtionManage startUpdatingLocation];
 }
 
 
@@ -154,7 +159,7 @@
     
     [_mapView addClusteredAnnotations:_noteAnnotations];
     
-    [_mapView showAnnotations:_mapView.annotations animated:YES];
+    
 }
 
 
@@ -195,10 +200,12 @@
     CLLocation * currLocation = [locations lastObject];
     
     
+     NSLog(@"%lf",_mapView.userLocation.coordinate.latitude);
+    
     [MKMapView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance
-        ([_mapView.userLocation coordinate], 1500, 1500);
+        (CLLocationCoordinate2DMake(currLocation.coordinate.latitude, currLocation.coordinate.longitude), 1500, 1500);
         [_mapView setRegion:region animated:YES];
         
         //[manager stopUpdatingLocation];
@@ -271,7 +278,7 @@
        didFailWithError:(NSError *)error{
     
     NSLog(@"定位失败");
-    [manager stopUpdatingLocation];
+    //[manager stopUpdatingLocation];
     
     
 }

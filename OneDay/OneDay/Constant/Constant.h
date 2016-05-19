@@ -44,4 +44,4 @@
 
 
 //static demo
-UIKIT_EXTERN NSString *const k_HY_NotifacationCityChange;
+UIKIT_EXTERN NSString *const kHYNotifacation_NoteSaveChange;

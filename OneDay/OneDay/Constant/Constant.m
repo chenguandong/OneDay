@@ -7,4 +7,4 @@
 //
 
 #import "Constant.h"
-NSString *const k_HY_NotifacationCityChange = @"notifacationCityChange";
+NSString *const kHYNotifacation_NoteSaveChange = @"k_HY_Notifacation_NoteSaveChange";

@@ -225,6 +225,15 @@
         
     }];
     
+    [self noteDataChangeNotifaction];
+    
+}
+
+- (void)noteDataChangeNotifaction{
+
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:kHYNotifacation_NoteSaveChange object:nil];
+    
 }
 
 - (void)updateNote{
@@ -248,6 +257,8 @@
         }
         
         [realm commitWriteTransaction];
+        
+        [self noteDataChangeNotifaction];
     }
 }
 

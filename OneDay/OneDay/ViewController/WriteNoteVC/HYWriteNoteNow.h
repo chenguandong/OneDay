@@ -10,8 +10,12 @@
 
 @class NoteDBModel;
 
+
+
 @interface HYWriteNoteNow : UIViewController
 
 @property(nonatomic,strong)NoteDBModel *noteModel;
+
+
 
 @end

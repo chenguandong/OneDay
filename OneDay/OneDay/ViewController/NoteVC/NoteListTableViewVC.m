@@ -10,6 +10,7 @@
 #import "NoteDBModel.h"
 #import "HYWriteNoteNow.h"
 #import "NoteListTableViewCell.h"
+#import "Constant.h"
 @interface NoteListTableViewVC ()
 
 @property(nonatomic)NSMutableArray<NoteDBModel*>*noteArray;
@@ -36,6 +37,11 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([NoteListTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"NoteListTableViewCell"];
     
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(noteDataChange) name:kHYNotifacation_NoteSaveChange object:nil];
+    
+    
+    [self noteDataChange];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -43,6 +49,26 @@
     [super viewWillAppear: YES];
     
     [self.navigationController setToolbarHidden:YES animated:NO];
+    
+   
+}
+
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+#pragma mark - VC delegate
+
+- (void)noteDataChange{
+
     
     if (_noteArray.count!=0) {
         [_noteArray removeAllObjects];
@@ -58,10 +84,6 @@
     [self.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - UITableView datesource & delegate
 
@@ -91,6 +113,7 @@
     HYWriteNoteNow *textVC = [[HYWriteNoteNow alloc]init];
     
     textVC.hidesBottomBarWhenPushed = YES;
+    
     
     textVC.noteModel = noteModel;
     
