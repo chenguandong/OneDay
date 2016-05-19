@@ -3,4 +3,5 @@ pod 'BlocksKit'
 pod 'Realm'
 pod 'DateTools'
 pod 'Masonry'
+pod "TSClusterMapView"
 pod 'YYKit'

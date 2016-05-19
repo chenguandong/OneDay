@@ -64,8 +64,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // setting toolsBar
-    [self.navigationController setToolbarHidden:NO animated:NO];
-    
+//    [self.navigationController setToolbarHidden:NO animated:YES];
+//    
     _textView.inputAccessoryView = [self bottomToolsBar];
     
     self.toolbarItems = [self toolsBarButtonItems];
@@ -137,12 +137,16 @@
     
     [super viewWillAppear:YES];
     
+    // setting toolsBar
+    [self.navigationController setToolbarHidden:NO animated:YES];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:YES];
+    
+    [self.navigationController setToolbarHidden:YES animated:NO];
     
     if (_noteModel) {
         

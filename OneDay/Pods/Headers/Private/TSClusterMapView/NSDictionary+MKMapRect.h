@@ -1,0 +1,1 @@
+../../../TSClusterMapView/Pod/Classes/NSDictionary+MKMapRect.h

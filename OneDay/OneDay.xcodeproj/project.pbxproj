@@ -15,6 +15,9 @@
 		292BF41D1CEC2A22008356BA /* NoteListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292BF41B1CEC2A22008356BA /* NoteListTableViewCell.m */; };
 		292BF41E1CEC2A22008356BA /* NoteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 292BF41C1CEC2A22008356BA /* NoteListTableViewCell.xib */; };
 		292BF4241CEC376E008356BA /* DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 292BF4231CEC376E008356BA /* DateTools.m */; };
+		292BF4291CECBB56008356BA /* HYNoteAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 292BF4281CECBB55008356BA /* HYNoteAnnotation.m */; };
+		292BF42C1CECBE7D008356BA /* ADBaseAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 292BF42B1CECBE7D008356BA /* ADBaseAnnotation.m */; };
+		292BF42F1CECC4E4008356BA /* TSDemoClusteredAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 292BF42E1CECC4E4008356BA /* TSDemoClusteredAnnotationView.m */; };
 		298DEAE11CDB55D000AD4773 /* Constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 298DEADE1CDB55D000AD4773 /* Constant.m */; };
 		298DEAEB1CDB569700AD4773 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 298DEAE41CDB569700AD4773 /* BaseCollectionViewController.m */; };
 		298DEAEC1CDB569700AD4773 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 298DEAE61CDB569700AD4773 /* BaseTabBarController.m */; };
@@ -114,6 +117,12 @@
 		292BF41C1CEC2A22008356BA /* NoteListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteListTableViewCell.xib; sourceTree = "<group>"; };
 		292BF4221CEC376E008356BA /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
 		292BF4231CEC376E008356BA /* DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateTools.m; sourceTree = "<group>"; };
+		292BF4271CECBB55008356BA /* HYNoteAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYNoteAnnotation.h; sourceTree = "<group>"; };
+		292BF4281CECBB55008356BA /* HYNoteAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYNoteAnnotation.m; sourceTree = "<group>"; };
+		292BF42A1CECBE7D008356BA /* ADBaseAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBaseAnnotation.h; sourceTree = "<group>"; };
+		292BF42B1CECBE7D008356BA /* ADBaseAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBaseAnnotation.m; sourceTree = "<group>"; };
+		292BF42D1CECC4E4008356BA /* TSDemoClusteredAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSDemoClusteredAnnotationView.h; sourceTree = "<group>"; };
+		292BF42E1CECC4E4008356BA /* TSDemoClusteredAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSDemoClusteredAnnotationView.m; sourceTree = "<group>"; };
 		298DEADD1CDB55D000AD4773 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		298DEADE1CDB55D000AD4773 /* Constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constant.m; sourceTree = "<group>"; };
 		298DEAE31CDB569700AD4773 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewController.h; sourceTree = "<group>"; };
@@ -276,6 +285,27 @@
 				292BF41C1CEC2A22008356BA /* NoteListTableViewCell.xib */,
 			);
 			path = NoteListCell;
+			sourceTree = "<group>";
+		};
+		292BF4251CECBAEB008356BA /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				292BF4261CECBB01008356BA /* MapView */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		292BF4261CECBB01008356BA /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				292BF42D1CECC4E4008356BA /* TSDemoClusteredAnnotationView.h */,
+				292BF42E1CECC4E4008356BA /* TSDemoClusteredAnnotationView.m */,
+				292BF42A1CECBE7D008356BA /* ADBaseAnnotation.h */,
+				292BF42B1CECBE7D008356BA /* ADBaseAnnotation.m */,
+				292BF4271CECBB55008356BA /* HYNoteAnnotation.h */,
+				292BF4281CECBB55008356BA /* HYNoteAnnotation.m */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		298DEAD91CDB55D000AD4773 /* BaseClass */ = {
@@ -512,6 +542,7 @@
 		29B0E7331CDAF3C300FECDC3 /* OneDay */ = {
 			isa = PBXGroup;
 			children = (
+				292BF4251CECBAEB008356BA /* CustomView */,
 				290A353E1CE9EBA500DCEC92 /* Model */,
 				298DEAEF1CDB5A7700AD4773 /* Tools */,
 				298DEAE21CDB55DA00AD4773 /* AppDelegate */,
@@ -792,16 +823,19 @@
 				298DEAED1CDB569700AD4773 /* BaseTableViewController.m in Sources */,
 				290A35421CE9EBF100DCEC92 /* LocationModel.m in Sources */,
 				292BF41D1CEC2A22008356BA /* NoteListTableViewCell.m in Sources */,
+				292BF4291CECBB56008356BA /* HYNoteAnnotation.m in Sources */,
 				290A35491CEAE05200DCEC92 /* TagDBModel.m in Sources */,
 				298DEB061CDB613700AD4773 /* SettingTableViewVC.m in Sources */,
 				298DEAEB1CDB569700AD4773 /* BaseCollectionViewController.m in Sources */,
 				290A35461CEADAF300DCEC92 /* NoteDBModel.m in Sources */,
 				298DEAFC1CDB5C9000AD4773 /* HYTabBarController.m in Sources */,
 				298DEAEC1CDB569700AD4773 /* BaseTabBarController.m in Sources */,
+				292BF42C1CECBE7D008356BA /* ADBaseAnnotation.m in Sources */,
 				298DEAE11CDB55D000AD4773 /* Constant.m in Sources */,
 				298DEAF71CDB5B8B00AD4773 /* WelcomeVC.m in Sources */,
 				29AAD4A31CE326F300DCE81C /* HYWriteNoteNow.m in Sources */,
 				298DEB121CDB619600AD4773 /* MapNoteVC.m in Sources */,
+				292BF42F1CECC4E4008356BA /* TSDemoClusteredAnnotationView.m in Sources */,
 				298DEB0D1CDB617F00AD4773 /* WriteNoteVC.m in Sources */,
 				298DEB031CDB5FC600AD4773 /* NoteListTableViewVC.m in Sources */,
 				292BF4241CEC376E008356BA /* DateTools.m in Sources */,

@@ -19,6 +19,7 @@ PODS:
   - Realm (0.101.0):
     - Realm/Headers (= 0.101.0)
   - Realm/Headers (0.101.0)
+  - TSClusterMapView (2.3.1)
   - YYKit (1.0.5):
     - YYKit/no-arc (= 1.0.5)
   - YYKit/no-arc (1.0.5)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - DateTools
   - Masonry
   - Realm
+  - TSClusterMapView
   - YYKit
 
 SPEC CHECKSUMS:
@@ -35,6 +37,7 @@ SPEC CHECKSUMS:
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   Realm: b21596d6d7e1c054f6fae967d27263d2593ca309
+  TSClusterMapView: 909762f69d1428362d7a5ed1da8defa77a6d27d3
   YYKit: f2654fe525de2283648db957bddb37ddd8e06549
 
 COCOAPODS: 0.38.2
