@@ -178,7 +178,7 @@
     
     NoteDBModel *noteModel = [[NoteDBModel alloc]init];
     
-    noteModel.note_title = _textView.text;
+    noteModel.note_title = [_textView.attributedText string];
     
     NSData *noteData =  [_textView.attributedText archiveToData];
     
@@ -246,7 +246,7 @@
         
         if (_textView.text.length!=0) {
             
-            _noteModel.note_title = _textView.text;
+            _noteModel.note_title = [_textView.attributedText string];
         }
 
         

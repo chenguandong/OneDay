@@ -34,7 +34,7 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3YR-Pp-EkL" customClass="YYTextView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3YR-Pp-EkL">
                         <rect key="frame" x="68" y="7" width="244" height="86"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -52,7 +52,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dayLable" destination="Pna-VH-qFL" id="X5v-PT-K1R"/>
-                <outlet property="textView" destination="3YR-Pp-EkL" id="HdK-rB-yCe"/>
+                <outlet property="textViewContainer" destination="3YR-Pp-EkL" id="nSg-EC-gSI"/>
                 <outlet property="weeksLable" destination="ITa-c8-H5u" id="A23-yd-nMx"/>
             </connections>
             <point key="canvasLocation" x="253" y="217"/>

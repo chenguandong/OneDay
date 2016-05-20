@@ -12,13 +12,16 @@
 #import <NSDate+DateTools.h>
 #import <Foundation/Foundation.h>
 #import "DateTools.h"
+#import "Constant.h"
 @interface NoteListTableViewCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *dayLable;
 
 @property (weak, nonatomic) IBOutlet UILabel *weeksLable;
 
-@property (weak, nonatomic) IBOutlet YYTextView *textView;
+@property (weak, nonatomic) IBOutlet UIView *textViewContainer;
+
+@property(nonatomic)UITextView *textView;
 
 @end
 
@@ -28,11 +31,23 @@
     [super awakeFromNib];
     // Initialization code
     
+    _textView = [UITextView new];
+    
+    [_textViewContainer addSubview:_textView];
+    
     _textView.editable = NO;
     
     _textView.userInteractionEnabled = NO;
     
-    _textView.font =[UIFont fontWithName:@"Times New Roman" size:15];
+    
+    _textView.font =[UIFont fontWithName:@"Times New Roman" size:17];
+    
+    
+    [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.edges.equalTo(_textViewContainer);
+    }];
+    
 }
 
 - (void)setNoteModel:(NoteDBModel *)noteModel{
@@ -53,6 +68,11 @@
     }
 }
 
+
+- (void)layoutSubviews{
+
+
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
