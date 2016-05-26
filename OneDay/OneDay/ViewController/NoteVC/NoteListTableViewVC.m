@@ -74,7 +74,7 @@
         [_noteArray removeAllObjects];
     }
     
-    RLMResults *noteResult =  [NoteDBModel allObjects];
+    RLMResults *noteResult =  [[NoteDBModel allObjects] sortedResultsUsingProperty:@"note_date" ascending:NO];
     
     for (NoteDBModel *noteModel in noteResult) {
         
